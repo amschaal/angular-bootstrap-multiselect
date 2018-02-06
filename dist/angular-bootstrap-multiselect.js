@@ -112,7 +112,7 @@
                 };
 
                 var watcher = $scope.$watch('selectedOptions', function () {
-                    if ($scope.idProp && $scope.idAsValue){
+                    if ($scope.idProp && $scope.idAsValue && $scope.selectedOptions){
 	                	var selected = $scope.selectedOptions.map(function(el){return $scope.getId(el);});
 	                	$ngModelCtrl.$setViewValue(selected);
                 	}else
