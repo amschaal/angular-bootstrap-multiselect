@@ -20,6 +20,7 @@
                 options: '=',
                 displayProp: '@',
                 idProp: '@',
+                idAsValue: '=?',
                 searchLimit: '=?',
                 selectionLimit: '=?',
                 showSelectAll: '=?',
@@ -111,7 +112,11 @@
                 };
 
                 var watcher = $scope.$watch('selectedOptions', function () {
-                    $ngModelCtrl.$setViewValue(angular.copy($scope.selectedOptions));
+                    if ($scope.idProp && $scope.idAsValue){
+	                	var selected = $scope.selectedOptions.map(function(el){return $scope.getId(el);});
+	                	$ngModelCtrl.$setViewValue(selected);
+                	}else
+                        $ngModelCtrl.$setViewValue(angular.copy($scope.selectedOptions));
                 }, true);
 
                 $scope.$on('$destroy', function () {
